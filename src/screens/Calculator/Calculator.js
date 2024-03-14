@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {View, Text, SafeAreaView, TextInput, Button} from 'react-native';
 import CommonStyles from '../../common/CommonStyles';
 import {Picker} from '@react-native-picker/picker';
-import {Colors} from '../../constants/Colors';
 import HeaderComponent from '../../components/HeaderComponent';
+import styles from './styles';
 
 export default function Calculator() {
   const [num1, setNum1] = useState('');
@@ -37,67 +37,34 @@ export default function Calculator() {
   return (
     <SafeAreaView style={CommonStyles.container}>
       <HeaderComponent title={'Calculator'} />
-      <View style={{alignItems: 'center'}}>
-        <View style={{paddingTop: '5%', width: '100%'}}>
-          <View
-            style={{
-              // backgroundColor: 'black',
-              width: '80%',
-              alignSelf: 'center',
-              alignItems: 'center',
-            }}>
-            <Text>Enter First Value</Text>
+      <View style={styles.alignCenter}>
+        <View style={styles.mainViewPadding}>
+          <View style={styles.inputMainView}>
+            <View style={styles.inputFieldText}>
+              <Text>Enter First Value</Text>
+            </View>
             <TextInput
-              style={{
-                borderWidth: 2,
-                marginBottom: 15,
-                width: '80%',
-                backgroundColor: Colors.placeholderBackgroundColor,
-                borderColor: Colors.appColor,
-                borderRadius: 10,
-                paddingHorizontal: 15,
-              }}
+              style={styles.inputStyles}
               onChangeText={text => setNum1(text)}
               value={num1}
               keyboardType="numeric"
-              placeholder="Enter number 1"
+              placeholder="Enter first number"
             />
           </View>
-          <View
-            style={{
-              // backgroundColor: 'black',
-              width: '80%',
-              alignSelf: 'center',
-              alignItems: 'center',
-            }}>
-            <Text>Enter Second Value</Text>
+          <View style={styles.inputMainView}>
+            <View style={styles.inputFieldText}>
+              <Text>Enter Second Value</Text>
+            </View>
             <TextInput
-              style={{
-                borderWidth: 2,
-                marginBottom: 15,
-                width: '80%',
-                backgroundColor: Colors.placeholderBackgroundColor,
-                borderColor: Colors.appColor,
-                borderRadius: 10,
-                paddingHorizontal: 15,
-              }}
+              style={styles.inputStyles}
               onChangeText={text => setNum2(text)}
               value={num2}
               keyboardType="numeric"
-              placeholder="Enter number 2"
+              placeholder="Enter second number"
             />
           </View>
         </View>
-        <View
-          style={{
-            height: 50,
-            width: '65%',
-            borderBottomWidth: 2,
-            borderColor: 'red', // Set the border color here
-            // alignSelf: 'center',
-            margin: '10%',
-            borderRadius: 10,
-          }}>
+        <View style={styles.pickerView}>
           <Picker
             selectedValue={operator}
             onValueChange={(itemValue, itemIndex) => setOperator(itemValue)}>
@@ -106,22 +73,12 @@ export default function Calculator() {
             <Picker.Item label="Multiplication" value="multiply" />
           </Picker>
         </View>
-        <View style={{width: '60%', alignSelf: 'center'}}>
+        <View style={styles.buttonView}>
           <Button title="Calculate" onPress={calculate} />
         </View>
-        <View
-          style={{
-            alignSelf: 'center',
-            margin: '5%',
-            padding: '2%',
-            backgroundColor: Colors.appColor,
-            borderRadius: 10,
-            width: '30%',
-            alignItems: 'center',
-          }}>
-          <Text style={{color: Colors.whiteColor}}>
-            Result:{' '}
-            <Text style={{fontWeight: '600', fontSize: 15}}>{result}</Text>
+        <View style={styles.resultView}>
+          <Text style={styles.whiteColor}>
+            Result: <Text style={styles.resultText}>{result}</Text>
           </Text>
         </View>
       </View>

@@ -9,6 +9,8 @@ import {Colors} from '../../constants/Colors';
 import HeaderComponent from '../../components/HeaderComponent';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useNavigation} from '@react-navigation/native';
+import CommonStyles from '../../common/CommonStyles';
+import styles from './styles';
 
 export default function Notification() {
   const navigation = useNavigation();
@@ -43,7 +45,7 @@ export default function Notification() {
     );
   };
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={CommonStyles.container}>
       <HeaderComponent
         title={'Notifications'}
         onRightIconPressed={handleLogout}
@@ -51,23 +53,13 @@ export default function Notification() {
           <MaterialIcons name="logout" size={25} color={Colors.appColor} />
         }
       />
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <Text style={{paddingBottom: '5%'}}>Click to get notifications</Text>
+      <View style={styles.mainTopView}>
+        <Text style={styles.paddingBottom5}>Click to get notifications</Text>
 
         <TouchableOpacity
           onPress={handleTestNotification}
-          style={{
-            width: '60%',
-            height: '8%',
-            backgroundColor: 'red',
-            borderRadius: 10,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Text
-            style={{color: Colors.whiteColor, fontWeight: '600', fontSize: 20}}>
-            Get Notifications
-          </Text>
+          style={styles.buttonView}>
+          <Text style={styles.buttonText}>Get Notifications</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

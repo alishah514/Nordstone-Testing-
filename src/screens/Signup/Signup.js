@@ -34,7 +34,7 @@ export default function Signup() {
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
         Alert.alert('User Created Successfully');
-        navigation.navigate('Notification');
+        navigation.navigate('Home');
         clearStates();
       })
       .catch(error => {
@@ -57,7 +57,7 @@ export default function Signup() {
     <SafeAreaView style={CommonStyles.container}>
       {isLoading && (
         <View style={CommonStyles.overlay}>
-          <ActivityIndicator size="large" color="white" />
+          <ActivityIndicator size="large" color={Colors.whiteColor} />
         </View>
       )}
 
@@ -69,11 +69,7 @@ export default function Signup() {
           </Text>
         </View>
       </View>
-      <View
-        style={{
-          paddingTop: '15%',
-          alignItems: 'center',
-        }}>
+      <View style={styles.mainView}>
         <InputField
           value={email}
           onChangeText={text => setEmail(text)}
@@ -89,13 +85,7 @@ export default function Signup() {
           onChangeText={text => setConfirmPassword(text)}
           placeholder="Confirm Password"
         />
-
-        <View
-          style={{
-            width: '80%',
-            // marginTop: '10%',
-            alignItems: 'center',
-          }}>
+        <View style={styles.buttonView}>
           <Button
             isDisabled={
               email === '' || password === '' || confirmPassword === ''
@@ -104,14 +94,7 @@ export default function Signup() {
             onPress={signupTest}
           />
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <Text
-              style={{
-                color: Colors.lightBlackColor,
-                fontWeight: '700',
-                paddingTop: '5%',
-              }}>
-              Already have an account
-            </Text>
+            <Text style={styles.loginText}>Already have an account</Text>
           </TouchableOpacity>
         </View>
       </View>

@@ -15,5 +15,18 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   missedTextView: {width: '80%', paddingTop: '5%'},
+  mainView: {
+    paddingTop: '15%',
+    alignItems: 'center',
+  },
+  buttonView: {
+    width: '80%',
+    alignItems: 'center',
+  },
+  loginText: {
+    color: Colors.lightBlackColor,
+    fontWeight: '700',
+    paddingTop: '5%',
+  },
 });
 export default styles;

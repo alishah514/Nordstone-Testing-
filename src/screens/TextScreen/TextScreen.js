@@ -5,17 +5,16 @@ import {
   Alert,
   FlatList,
   TextInput,
-  KeyboardAvoidingView,
   ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import CommonStyles from '../../common/CommonStyles';
 import firestore from '@react-native-firebase/firestore';
-import InputField from '../../components/InputField';
 import Button from '../../components/Button';
 import {Colors} from '../../constants/Colors';
 import HeaderComponent from '../../components/HeaderComponent';
+import styles from './styles';
 
 export default function TextScreen() {
   const [texts, setTexts] = useState([]);
@@ -92,16 +91,16 @@ export default function TextScreen() {
   };
 
   return (
-    <SafeAreaView style={[CommonStyles.container]}>
+    <SafeAreaView style={CommonStyles.container}>
       <HeaderComponent title={'Text Screen'} />
       {isLoading && (
         <View style={CommonStyles.overlay}>
-          <ActivityIndicator size="large" color="white" />
+          <ActivityIndicator size="large" color={Colors.whiteColor} />
         </View>
       )}
-      <View style={{alignItems: 'center'}}>
-        <View style={{paddingTop: '5%'}} />
-        <Text style={{width: '78%', paddingBottom: '2%'}}>
+      <View style={styles.alignCenter}>
+        <View style={styles.paddingTop5} />
+        <Text style={styles.textFieldInput}>
           Please Enter Text in the field
         </Text>
 
@@ -109,19 +108,11 @@ export default function TextScreen() {
           value={inputText}
           onChangeText={text => setInputText(text)}
           placeholder={'Enter Text to Firestore'}
-          style={{
-            borderWidth: 2,
-            marginBottom: 15,
-            width: '80%',
-            backgroundColor: Colors.placeholderBackgroundColor,
-            borderColor: Colors.appColor,
-            borderRadius: 10,
-            paddingHorizontal: 15,
-          }}
+          style={styles.inputStyles}
           placeholderTextColor={Colors.placeholderTextColor}
         />
 
-        <View style={{width: '40%', height: '30%', alignSelf: 'center'}}>
+        <View style={styles.buttonView}>
           <Button
             isDisabled={inputText === ''}
             title="Send Text"
@@ -129,14 +120,8 @@ export default function TextScreen() {
           />
         </View>
 
-        <View style={{width: '80%'}}>
-          <Text
-            style={{
-              marginBottom: '5%',
-              color: Colors.blackColor,
-              alignSelf: 'center',
-              fontWeight: '600',
-            }}>
+        <View style={styles.width80}>
+          <Text style={styles.noteText}>
             {'Note: '}
             Click on the Item to delete it
           </Text>
@@ -145,23 +130,8 @@ export default function TextScreen() {
             renderItem={({item}) => (
               <TouchableOpacity
                 onPress={() => handleItemDelete(item.id)}
-                style={{
-                  marginBottom: 10,
-                  backgroundColor: Colors.placeholderBackgroundColor,
-                  padding: 10,
-                  borderRadius: 10,
-                  alignItems: 'center',
-                  borderColor: Colors.appColor,
-                  borderWidth: 2,
-                }}>
-                <Text
-                  style={{
-                    fontSize: 16,
-                    color: Colors.appColor,
-                    fontWeight: '600',
-                  }}>
-                  {item?.text}
-                </Text>
+                style={styles.listView}>
+                <Text style={styles.listText}>{item?.text}</Text>
               </TouchableOpacity>
             )}
             keyExtractor={item => item?.id}

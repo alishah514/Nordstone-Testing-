@@ -39,12 +39,11 @@ export default function Login() {
     }
 
     // Authenticate user
-
     auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => {
         Alert.alert('User Successfully Signed In');
-        navigation.navigate('Notification');
+        navigation.navigate('Home');
         clearStates();
       })
       .catch(error => {
@@ -79,7 +78,7 @@ export default function Login() {
     <SafeAreaView style={CommonStyles.container}>
       {isLoading && (
         <View style={CommonStyles.overlay}>
-          <ActivityIndicator size="large" color="white" />
+          <ActivityIndicator size="large" color={Colors.whiteColor} />
         </View>
       )}
 
@@ -91,11 +90,7 @@ export default function Login() {
           </Text>
         </View>
       </View>
-      <View
-        style={{
-          paddingTop: '15%',
-          alignItems: 'center',
-        }}>
+      <View style={styles.mainView}>
         <InputField
           value={email}
           onChangeText={text => setEmail(text)}
@@ -106,21 +101,10 @@ export default function Login() {
           onChangeText={text => setPassword(text)}
           placeholder="Password"
         />
-        <View
-          style={{
-            width: '80%',
-            alignItems: 'flex-end',
-          }}>
-          <Text style={{color: Colors.appColor, fontWeight: '700'}}>
-            Forgot your Password?
-          </Text>
+        <View style={styles.forgotPassword}>
+          <Text style={styles.forgotPasswordText}>Forgot your Password?</Text>
         </View>
-        <View
-          style={{
-            width: '80%',
-            marginTop: '10%',
-            alignItems: 'center',
-          }}>
+        <View style={styles.buttonView}>
           <Button
             isDisabled={email === '' || password === ''}
             title={'Sign in'}
@@ -128,12 +112,8 @@ export default function Login() {
           />
           <TouchableOpacity
             onPress={() => navigation.navigate('Signup')}
-            style={{
-              paddingTop: '10%',
-            }}>
-            <Text style={{color: Colors.lightBlackColor, fontWeight: '700'}}>
-              Create a new account
-            </Text>
+            style={styles.paddingTop10}>
+            <Text style={styles.registerText}>Create a new account</Text>
           </TouchableOpacity>
         </View>
       </View>

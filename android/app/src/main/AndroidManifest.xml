@@ -25,5 +25,14 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
+       <meta-data
+        android:name="com.dexterous.flutterlocalnotifications.default_notification_channel_id"
+        android:value="default-channel-id"/>
+      <meta-data
+        android:name="com.dexterous.flutterlocalnotifications.default_notification_channel_name"
+        android:value="Default Channel"/>
+      <meta-data
+        android:name="com.dexterous.flutterlocalnotifications.default_notification_channel_description"
+        android:value="A default channel"/>
     </application>
 </manifest>

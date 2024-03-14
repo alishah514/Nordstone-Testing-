@@ -11,6 +11,7 @@ import TextScreen from '../screens/TextScreen/TextScreen.js';
 import Calculator from '../screens/Calculator/Calculator.js';
 import Ionicons from 'react-native-vector-icons/Ionicons'; // Import the icon library
 import {Colors} from '../constants/Colors.js';
+import Settings from '../screens/Settings/Settings.js';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -28,8 +29,8 @@ const BottomTabNavigator = () => {
         tabBarStyle: {backgroundColor: Colors.placeholderBackgroundColor},
       }}>
       <Tab.Screen
-        name="Notification"
-        component={Notification}
+        name="Settings"
+        component={Settings}
         options={{
           tabBarIcon: ({color, size, focused}) => (
             <Ionicons
@@ -90,7 +91,7 @@ const AppNavigator = () => {
         <Stack.Screen name="Splash" component={Splash} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signup" component={Signup} />
-        <Stack.Screen name="Notification" component={BottomTabNavigator} />
+        <Stack.Screen name="Home" component={BottomTabNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   );

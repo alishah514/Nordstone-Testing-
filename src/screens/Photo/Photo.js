@@ -16,7 +16,7 @@ import storage from '@react-native-firebase/storage';
 import Button from '../../components/Button';
 import {Colors} from '../../constants/Colors';
 import HeaderComponent from '../../components/HeaderComponent';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import styles from './styles';
 
 export default function Photo() {
   const [photoURI, setPhotoURI] = useState(null);
@@ -39,7 +39,6 @@ export default function Photo() {
         },
         error => {
           console.error('Error fetching photos:', error);
-          // Handle the error here (e.g., show an error message to the user)
         },
       );
 
@@ -171,53 +170,18 @@ export default function Photo() {
       <HeaderComponent title={'Photos'} />
       {isLoading && (
         <View style={CommonStyles.overlay}>
-          <ActivityIndicator size="large" color="white" />
+          <ActivityIndicator size="large" color={Colors.whiteColor} />
         </View>
       )}
-      <TouchableOpacity
-        style={{paddingTop: '10%', alignItems: 'center'}}
-        onPress={handleSelectOption}>
-        <View
-          style={{
-            width: 150,
-            height: 150,
-            backgroundColor: 'black',
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderRadius: 200,
-          }}>
-          {!photoURI && (
-            <Text
-              style={{
-                color: Colors.whiteColor,
-                fontWeight: '600',
-                fontSize: 20,
-              }}>
-              Select Photo
-            </Text>
-          )}
+      <TouchableOpacity style={styles.mainTopView} onPress={handleSelectOption}>
+        <View style={styles.roundBox}>
+          {!photoURI && <Text style={styles.selectPhoto}>Select Photo</Text>}
           {photoURI && (
-            <Image
-              source={{uri: photoURI}}
-              style={{
-                width: 150,
-                height: 150,
-                backgroundColor: 'black',
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderRadius: 200,
-              }}
-            />
+            <Image source={{uri: photoURI}} style={styles.roundBox} />
           )}
         </View>
       </TouchableOpacity>
-      <View
-        style={{
-          width: '50%',
-          height: '25%',
-          paddingTop: '5%',
-          alignSelf: 'center',
-        }}>
+      <View style={styles.buttonView}>
         <Button
           isDisabled={!photoURI}
           title={'Upload Photo'}
@@ -225,22 +189,10 @@ export default function Photo() {
         />
       </View>
 
-      <View
-        style={{
-          width: '100%',
-          height: '50%',
-          alignItems: 'center',
-        }}>
-        <Text
-          style={{
-            color: Colors.blackColor,
-            fontWeight: '600',
-            fontSize: 15,
-            marginBottom: '3%',
-          }}>
+      <View style={styles.listTextView}>
+        <Text style={styles.ListText}>
           List of Photos fetched from Firestore
         </Text>
-        {/* Render the list of photos */}
 
         <FlatList
           data={photos}
@@ -250,24 +202,11 @@ export default function Photo() {
             return (
               <TouchableOpacity
                 onPress={() => deletePhoto(item.id)}
-                style={{
-                  marginBottom: 10,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                }}>
-                <Text style={{width: '30%', textAlign: 'center'}}>
-                  {fileName}
-                </Text>
+                style={styles.listTopView}>
+                <Text style={styles.filenameText}>{fileName}</Text>
                 <Image
                   source={{uri: item.url}}
-                  style={{
-                    width: 150,
-                    height: 150,
-                    borderRadius: 200,
-                    borderWidth: 2,
-                    borderColor: Colors.blackColor,
-                    marginLeft: 10, // Add margin between text and image
-                  }}
+                  style={[styles.roundBox, styles.margin10]}
                 />
               </TouchableOpacity>
             );

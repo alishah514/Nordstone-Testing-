@@ -56,23 +56,22 @@ export async function sendTestNotification() {
 
     const response = await messaging().sendMessage({
       notification: {
-        title: 'Custom Title', // Change the title here
-        body: 'Custom Notification Body', // Change the body here
+        title: 'Custom Title',
+        body: 'Custom Notification Body',
       },
       token: fcmtoken,
     });
 
-    if (response === null) {
-      const timer = setTimeout(() => {
-        if (response === null) {
-          Alert.alert(
-            'Foreground notification sent successfully',
-            `Notification Title: Test Notifications \nNotification Body: 'Hello Nordstone Development Team'`,
-          );
-        }
-      }, 3000); // 3000 milliseconds = 3 seconds
-    }
     console.log('Test notification sent successfully:', response);
+
+    // // Assuming response is null if there is no error but you should check the documentation of messaging() to verify this behavior.
+    // if (response === null) {
+    //   // Handle success action here
+    //   Alert.alert(
+    //     'Foreground notification sent successfully',
+    //     `Notification Title: Test Notifications \nNotification Body: 'Hello Nordstone Development Team'`,
+    //   );
+    // }
   } catch (error) {
     console.log('Error sending test notification:', error);
     throw error;
